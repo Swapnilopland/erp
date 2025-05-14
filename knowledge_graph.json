@@ -1,0 +1,99 @@
+{
+    "intents": [
+        {
+            "intent": "greeting",
+            "patterns": [
+                "hello",
+                "hi",
+                "hey",
+                "good morning",
+                "good evening"
+            ],
+            "responses": [
+                "Hello! How can I help you today?",
+                "Hi there! What can I do for you?"
+            ]
+        },
+        {
+            "intent": "employee_management",
+            "patterns": [
+                "Show employee details",
+                "Get list of employees",
+                "Find employee"
+            ],
+            "subintents": [
+                {
+                    "subintent": "employees",
+                    "patterns": [
+                        "employee list",
+                        "list all employees",
+                        "show employees"
+                    ],
+                    "responses": [
+                        "Here is the list of employees."
+                    ]
+                },
+                {
+                    "subintent": "org_structure",
+                    "patterns": [
+                        "show org chart",
+                        "organization structure"
+                    ],
+                    "responses": [
+                        "This is the current organizational structure."
+                    ]
+                },
+                {
+                    "subintent": "recover_employees",
+                    "patterns": [
+                        "recover terminated employee",
+                        "restore employee"
+                    ],
+                    "responses": [
+                        "Restoring employee records..."
+                    ]
+                },
+                {
+                    "subintent": "assignments",
+                    "patterns": [
+                        "employee assignments",
+                        "show assignments"
+                    ],
+                    "responses": [
+                        "Listing all employee assignments."
+                    ]
+                },
+                {
+                    "subintent": "employee_events",
+                    "patterns": [
+                        "show employee events",
+                        "track events"
+                    ],
+                    "responses": [
+                        "Displaying recent employee events."
+                    ]
+                },
+                {
+                    "subintent": "geo_locations",
+                    "patterns": [
+                        "employee locations",
+                        "track geo locations"
+                    ],
+                    "responses": [
+                        "Showing geo-location data."
+                    ]
+                },
+                {
+                    "subintent": "insurances",
+                    "patterns": [
+                        "employee insurance",
+                        "insurance details"
+                    ],
+                    "responses": [
+                        "Here are the insurance details."
+                    ]
+                }
+            ]
+        }
+    ]
+}

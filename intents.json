@@ -1,0 +1,57 @@
+{
+  "intents": [
+    // ... (previous intents here)
+
+    {
+      "intent": "expenses",
+      "patterns": [
+        "Show my expenses",
+        "I want to view my expense reports",
+        "Expense summary",
+        "What are my recent expenses?"
+      ],
+      "responses": ["Fetching your latest expense reports..."],
+      "subintents": [
+        {
+          "subintent": "submit_expense",
+          "patterns": [
+            "Submit a new expense",
+            "I need to log an expense",
+            "Add expense for travel",
+            "Report expense for yesterday"
+          ],
+          "responses": [
+            "Sure, please provide the expense amount and category.",
+            "Let's log your expense. What is the type and amount?"
+          ]
+        },
+        {
+          "subintent": "view_expense",
+          "patterns": [
+            "View submitted expenses",
+            "Check expense history",
+            "Show all logged expenses"
+          ],
+          "responses": [
+            "Here is a list of your submitted expenses.",
+            "Displaying your expense history..."
+          ]
+        },
+        {
+          "subintent": "expense_status",
+          "patterns": [
+            "Check expense approval status",
+            "Status of my expense request",
+            "Was my expense approved?"
+          ],
+          "responses": [
+            "Let me check the status of your recent expense claims.",
+            "Checking approval status for your expenses..."
+          ]
+        }
+      ]
+    }
+
+    // ... (keep your farewell, greeting, etc. intents below this)
+  ]
+}
