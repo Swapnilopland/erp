@@ -94,6 +94,61 @@
                     ]
                 }
             ]
+        },
+        {
+            "intent": "time_tracking",
+            "patterns": [
+                "show my timesheets",
+                "my tasks",
+                "timesheet report",
+                "track time",
+                "log hours"
+            ],
+            "subintents": [
+                {
+                    "subintent": "timesheets",
+                    "patterns": [
+                        "show timesheets",
+                        "my timesheet",
+                        "timesheet entries"
+                    ],
+                    "responses": [
+                        "Here are your current timesheet entries."
+                    ]
+                },
+                {
+                    "subintent": "tasks",
+                    "patterns": [
+                        "show tasks",
+                        "my tasks",
+                        "assigned tasks"
+                    ],
+                    "responses": [
+                        "Here is a list of your assigned tasks."
+                    ]
+                },
+                {
+                    "subintent": "time_sheets",
+                    "patterns": [
+                        "time sheet details",
+                        "see time sheet"
+                    ],
+                    "responses": [
+                        "Displaying detailed time sheet entries."
+                    ]
+                },
+                {
+                    "subintent": "timesheet_reports",
+                    "patterns": [
+                        "generate timesheet report",
+                        "timesheet summary",
+                        "report my timesheet"
+                    ],
+                    "responses": [
+                        "Generating your timesheet report summary."
+                    ]
+                }
+            ]
         }
     ]
 }
