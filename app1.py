@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -29,6 +28,7 @@ class ERPChatbot:
             'Authorization': f'Bearer {ERP_API_KEY}',
             'Content-Type': 'application/json'
         })
+        pass
 
     def load_knowledge_graph(self):
         with open('knowledge_graph.json') as f:
@@ -115,9 +115,32 @@ class ERPChatbot:
             print(f"API Error: {e}")
             return None
 
+    def generate_employee_management_response(self, subintent):
+        if subintent == "employees":
+            return "Here is the list of employees."
+        elif subintent == "org_structure":
+            return "This is the current organizational structure."
+        elif subintent == "recover_employees":
+            return "Restoring employee records..."
+        elif subintent == "assignments":
+            return "Listing all employee assignments."
+        elif subintent == "employee_events":
+            return "Displaying recent employee events."
+        elif subintent == "geo_locations":
+            return "Showing geo-location data."
+        elif subintent == "insurances":
+            return "Here are the insurance details."
+        else:
+            return "Unknown employee management request."
+
     def generate_response(self, intent_data, user_message):
         intent = intent_data['intent']
         subintent = intent_data['subintent']
+
+        if intent == "employee_management":
+            return self.generate_employee_management_response(subintent)
+
+        # --- rest of the existing code unchanged below ---
         matched_intent = next((i for i in self.knowledge_graph['intents'] if i['intent'] == intent), None)
         if not matched_intent:
             return self.get_fallback_response(user_message)
@@ -126,7 +149,6 @@ class ERPChatbot:
             return "You have 8 casual leaves, 5 sick leaves, and 10 earned leaves remaining."
         if intent == "leave_history":
             return "Your recent leaves include:\n- 2024-12-05 to 2024-12-07 (Sick Leave)\n- 2025-01-10 to 2025-01-12 (Casual Leave)\n- 2025-03-15 (Earned Leave)"
-
         if intent == "leave_request":
             return self.apply_leave(user_message)
 
