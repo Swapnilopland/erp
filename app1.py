@@ -1,3 +1,4 @@
+# app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -28,7 +29,6 @@ class ERPChatbot:
             'Authorization': f'Bearer {ERP_API_KEY}',
             'Content-Type': 'application/json'
         })
-        pass
 
     def load_knowledge_graph(self):
         with open('knowledge_graph.json') as f:
@@ -115,32 +115,9 @@ class ERPChatbot:
             print(f"API Error: {e}")
             return None
 
-    def generate_employee_management_response(self, subintent):
-        if subintent == "employees":
-            return "Here is the list of employees."
-        elif subintent == "org_structure":
-            return "This is the current organizational structure."
-        elif subintent == "recover_employees":
-            return "Restoring employee records..."
-        elif subintent == "assignments":
-            return "Listing all employee assignments."
-        elif subintent == "employee_events":
-            return "Displaying recent employee events."
-        elif subintent == "geo_locations":
-            return "Showing geo-location data."
-        elif subintent == "insurances":
-            return "Here are the insurance details."
-        else:
-            return "Unknown employee management request."
-
     def generate_response(self, intent_data, user_message):
         intent = intent_data['intent']
         subintent = intent_data['subintent']
-
-        if intent == "employee_management":
-            return self.generate_employee_management_response(subintent)
-
-        # --- rest of the existing code unchanged below ---
         matched_intent = next((i for i in self.knowledge_graph['intents'] if i['intent'] == intent), None)
         if not matched_intent:
             return self.get_fallback_response(user_message)
@@ -151,7 +128,6 @@ class ERPChatbot:
             return "Your recent leaves include:\n- 2024-12-05 to 2024-12-07 (Sick Leave)\n- 2025-01-10 to 2025-01-12 (Casual Leave)\n- 2025-03-15 (Earned Leave)"
         if intent == "leave_request":
             return self.apply_leave(user_message)
-
         if intent == "expenses":
             if subintent == "submit_expense":
                 return "Sure, please provide the expense category and amount to proceed."
@@ -161,6 +137,17 @@ class ERPChatbot:
                 return "Let me check the status of your recent expense claims. One moment please..."
             else:
                 return "What would you like to do with your expenses? You can submit a new one or check existing records."
+        if intent == "time_tracking":
+            if subintent == "timesheets":
+                return "Here are your current timesheet entries."
+            elif subintent == "tasks":
+                return "Here is a list of your assigned tasks."
+            elif subintent == "time_sheets":
+                return "Displaying detailed time sheet entries."
+            elif subintent == "timesheet_reports":
+                return "Generating your timesheet report summary."
+            else:
+                return "Please specify what aspect of time tracking you are interested in."
 
         if matched_intent.get('api_endpoint'):
             api_response = self.call_erp_api(
@@ -233,7 +220,7 @@ class ERPChatbot:
         c.execute('''INSERT INTO conversations 
                      (user_id, message, response, intent, subintent, sentiment, confidence, timestamp)
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-                  (user_id, message, response,
+                  (user_id, message, response, 
                    intent_data.get('intent'), intent_data.get('subintent'),
                    sentiment.get('label'), intent_data.get('confidence', 0),
                    datetime.now()))
