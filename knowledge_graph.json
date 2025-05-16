@@ -1,154 +1,396 @@
 {
-    "intents": [
+  "intents": [
+    {
+      "intent": "greeting",
+      "patterns": ["hello", "hi", "hey", "good morning", "good evening"],
+      "responses": [
+        "Hello! How can I help you today?",
+        "Hi there! What can I do for you?"
+      ]
+    },
+    {
+      "intent": "employee_management",
+      "patterns": ["Show employee details", "Get list of employees", "Find employee"],
+      "responses": ["Sure, which employee-related detail would you like to access?"],
+      "subintents": [
         {
-            "intent": "greeting",
-            "patterns": [
-                "hello",
-                "hi",
-                "hey",
-                "good morning",
-                "good evening"
-            ],
-            "responses": [
-                "Hello! How can I help you today?",
-                "Hi there! What can I do for you?"
-            ]
+          "subintent": "employees",
+          "patterns": ["employee list", "list all employees", "show employees"],
+          "responses": ["Here is the list of employees."]
         },
         {
-            "intent": "employee_management",
-            "patterns": [
-                "Show employee details",
-                "Get list of employees",
-                "Find employee"
-            ],
-            "subintents": [
-                {
-                    "subintent": "employees",
-                    "patterns": [
-                        "employee list",
-                        "list all employees",
-                        "show employees"
-                    ],
-                    "responses": [
-                        "Here is the list of employees."
-                    ]
-                },
-                {
-                    "subintent": "org_structure",
-                    "patterns": [
-                        "show org chart",
-                        "organization structure"
-                    ],
-                    "responses": [
-                        "This is the current organizational structure."
-                    ]
-                },
-                {
-                    "subintent": "recover_employees",
-                    "patterns": [
-                        "recover terminated employee",
-                        "restore employee"
-                    ],
-                    "responses": [
-                        "Restoring employee records..."
-                    ]
-                },
-                {
-                    "subintent": "assignments",
-                    "patterns": [
-                        "employee assignments",
-                        "show assignments"
-                    ],
-                    "responses": [
-                        "Listing all employee assignments."
-                    ]
-                },
-                {
-                    "subintent": "employee_events",
-                    "patterns": [
-                        "show employee events",
-                        "track events"
-                    ],
-                    "responses": [
-                        "Displaying recent employee events."
-                    ]
-                },
-                {
-                    "subintent": "geo_locations",
-                    "patterns": [
-                        "employee locations",
-                        "track geo locations"
-                    ],
-                    "responses": [
-                        "Showing geo-location data."
-                    ]
-                },
-                {
-                    "subintent": "insurances",
-                    "patterns": [
-                        "employee insurance",
-                        "insurance details"
-                    ],
-                    "responses": [
-                        "Here are the insurance details."
-                    ]
-                }
-            ]
+          "subintent": "org_structure",
+          "patterns": ["show org chart", "organization structure"],
+          "responses": ["This is the current organizational structure."]
         },
         {
-            "intent": "time_tracking",
-            "patterns": [
-                "show my timesheets",
-                "my tasks",
-                "timesheet report",
-                "track time",
-                "log hours"
-            ],
-            "subintents": [
-                {
-                    "subintent": "timesheets",
-                    "patterns": [
-                        "show timesheets",
-                        "my timesheet",
-                        "timesheet entries"
-                    ],
-                    "responses": [
-                        "Here are your current timesheet entries."
-                    ]
-                },
-                {
-                    "subintent": "tasks",
-                    "patterns": [
-                        "show tasks",
-                        "my tasks",
-                        "assigned tasks"
-                    ],
-                    "responses": [
-                        "Here is a list of your assigned tasks."
-                    ]
-                },
-                {
-                    "subintent": "time_sheets",
-                    "patterns": [
-                        "time sheet details",
-                        "see time sheet"
-                    ],
-                    "responses": [
-                        "Displaying detailed time sheet entries."
-                    ]
-                },
-                {
-                    "subintent": "timesheet_reports",
-                    "patterns": [
-                        "generate timesheet report",
-                        "timesheet summary",
-                        "report my timesheet"
-                    ],
-                    "responses": [
-                        "Generating your timesheet report summary."
-                    ]
-                }
-            ]
+          "subintent": "recover_employees",
+          "patterns": ["recover terminated employee", "restore employee"],
+          "responses": ["Restoring employee records..."]
+        },
+        {
+          "subintent": "assignments",
+          "patterns": ["employee assignments", "show assignments"],
+          "responses": ["Listing all employee assignments."]
+        },
+        {
+          "subintent": "employee_events",
+          "patterns": ["show employee events", "track events"],
+          "responses": ["Displaying recent employee events."]
+        },
+        {
+          "subintent": "geo_locations",
+          "patterns": ["employee locations", "track geo locations"],
+          "responses": ["Showing geo-location data."]
+        },
+        {
+          "subintent": "insurances",
+          "patterns": ["employee insurance", "insurance details"],
+          "responses": ["Here are the insurance details."]
         }
-    ]
+      ]
+    },
+    {
+      "intent": "time_tracking",
+      "patterns": ["show my timesheets", "my tasks", "timesheet report", "track time", "log hours"],
+      "responses": ["What would you like to do with your timesheets or tasks?"],
+      "subintents": [
+        {
+          "subintent": "timesheets",
+          "patterns": ["show timesheets", "my timesheet", "timesheet entries"],
+          "responses": ["Here are your current timesheet entries."]
+        },
+        {
+          "subintent": "tasks",
+          "patterns": ["show tasks", "my tasks", "assigned tasks"],
+          "responses": ["Here is a list of your assigned tasks."]
+        },
+        {
+          "subintent": "time_sheets",
+          "patterns": ["time sheet details", "see time sheet"],
+          "responses": ["Displaying detailed time sheet entries."]
+        },
+        {
+          "subintent": "timesheet_reports",
+          "patterns": ["generate timesheet report", "timesheet summary", "report my timesheet"],
+          "responses": ["Generating your timesheet report summary."]
+        }
+      ]
+    },
+    {
+      "intent": "organizational_structure",
+      "patterns": [
+        "Show organizational structure",
+        "Who is who in the company?",
+        "Display company hierarchy",
+        "Show reporting structure"
+      ],
+      "subintents": [
+        {
+          "subintent": "find_manager",
+          "patterns": [
+            "Who is my manager?",
+            "Find my reporting manager",
+            "Who do I report to?",
+            "My supervisor"
+          ],
+          "responses": [
+            "Please provide your name so I can look up your manager."
+          ]
+        },
+        {
+          "subintent": "find_hr",
+          "patterns": [
+            "Who is the HR?",
+            "Show HR contact",
+            "Find my HR manager"
+          ],
+          "responses": [
+            "The HR Manager is Beulah Baki. Would you like their contact details?"
+          ]
+        },
+        {
+          "subintent": "department_heads",
+          "patterns": [
+            "Who are the department heads?",
+            "Show team leaders",
+            "List department managers"
+          ],
+          "responses": [
+            "Here are the department heads:\n- IT: Chandra Mohan Rowthu\n- HR: Beulah Baki\n- Finance: Supamudu Arrasetty"
+          ]
+        },
+        {
+          "subintent": "reporting_lines",
+          "patterns": [
+            "Show reporting lines",
+            "Who reports to whom?",
+            "Team hierarchy"
+          ],
+          "responses": [
+            "The reporting lines are based on the org chart. Please provide a name to trace the hierarchy."
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "payroll_queries",
+      "patterns": [
+        "payroll info",
+        "salary queries",
+        "questions about my payroll",
+        "pay related help"
+      ],
+      "subintents": [
+        {
+          "subintent": "salary_components",
+          "patterns": [
+            "What are my salary components?",
+            "Show salary breakup",
+            "Earnings and deductions",
+            "How is my salary structured?"
+          ],
+          "responses": [
+            "Your salary includes components like Basic, HRA, LTA, Special Allowance, and Group Medical deductions."
+          ]
+        },
+        {
+          "subintent": "component_taxable_status",
+          "patterns": [
+            "Is HRA taxable?",
+            "Which components are taxable?",
+            "Taxable salary items"
+          ],
+          "responses": [
+            "Group Medical, LTA, and Special Allowance are taxable. HRA and Other Allowance are non-taxable."
+          ]
+        },
+        {
+          "subintent": "salary_status",
+          "patterns": [
+            "Has my salary been processed?",
+            "Salary status for this month",
+            "Did I get paid?"
+          ],
+          "responses": [
+            "Your salary for this month has been processed. You should see it reflected in your account."
+          ]
+        },
+        {
+          "subintent": "attendance_impact",
+          "patterns": [
+            "Does attendance affect salary?",
+            "How are days calculated?",
+            "Is salary based on days worked?"
+          ],
+          "responses": [
+            "Yes, some components are dependent on attendance. Special Allowance, LTA, and Group Medical vary based on days worked."
+          ]
+        },
+        {
+          "subintent": "zero_value_removal",
+          "patterns": [
+            "Will components with zero value be removed?",
+            "Remove zero value salary items?",
+            "Why is a component missing?"
+          ],
+          "responses": [
+            "Certain components are removed from the payslip if their value is zero. For example, Special Allowance and LTA."
+          ]
+        },
+        {
+          "subintent": "view_payslip",
+          "patterns": [
+            "Show my payslip",
+            "Download my salary slip",
+            "Payslip for this month"
+          ],
+          "responses": [
+            "You can view or download your payslip from the Payroll → Run Payrolls section or request it to be emailed."
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "attendance",
+      "patterns": [
+        "attendance",
+        "mark attendance",
+        "did I check in today",
+        "attendance report",
+        "view my attendance"
+      ],
+      "subintents": [
+        {
+          "subintent": "mark_attendance",
+          "patterns": [
+            "mark my attendance",
+            "check in",
+            "punch in",
+            "log my attendance"
+          ],
+          "responses": ["Your attendance has been marked successfully."]
+        },
+        {
+          "subintent": "view_attendance",
+          "patterns": [
+            "show my attendance",
+            "attendance report",
+            "attendance history",
+            "how many days did I work"
+          ],
+          "responses": ["Here is your attendance report for the selected period."]
+        }
+      ]
+    },
+    {
+      "intent": "auto_invoice",
+      "patterns": [
+        "generate invoice",
+        "auto create invoice",
+        "create invoice",
+        "invoice automation",
+        "invoice system"
+      ],
+      "subintents": [
+        {
+          "subintent": "generate_invoice",
+          "patterns": [
+            "prepare invoice",
+            "generate a new invoice",
+            "make invoice",
+            "create sales invoice"
+          ],
+          "responses": [
+            "Please provide the customer ID and product details to generate the invoice."
+          ]
+        },
+        {
+          "subintent": "view_invoices",
+          "patterns": [
+            "show invoices",
+            "list invoices",
+            "invoice history",
+            "past invoices"
+          ],
+          "responses": ["Here are your recent invoices."]
+        }
+      ]
+    },
+    {
+      "intent": "expenses",
+      "patterns": [
+        "Show my expenses",
+        "I want to view my expense reports",
+        "Expense summary",
+        "What are my recent expenses?"
+      ],
+      "responses": ["Fetching your latest expense reports..."],
+      "subintents": [
+        {
+          "subintent": "submit_expense",
+          "patterns": [
+            "Submit a new expense",
+            "I need to log an expense",
+            "Add expense for travel",
+            "Report expense for yesterday"
+          ],
+          "responses": [
+            "Sure, please provide the expense amount and category.",
+            "Let's log your expense. What is the type and amount?"
+          ]
+        },
+        {
+          "subintent": "view_expense",
+          "patterns": [
+            "View submitted expenses",
+            "Check expense history",
+            "Show all logged expenses"
+          ],
+          "responses": [
+            "Here is a list of your submitted expenses.",
+            "Displaying your expense history..."
+          ]
+        },
+        {
+          "subintent": "expense_status",
+          "patterns": [
+            "Check expense approval status",
+            "Status of my expense request",
+            "Was my expense approved?"
+          ],
+          "responses": [
+            "Let me check the status of your recent expense claims.",
+            "Checking approval status for your expenses..."
+          ]
+        }
+      ]
+    },
+    {
+      "intent": "travel_management",
+      "patterns": [
+        "travel claims",
+        "my travel plans",
+        "business travel",
+        "trip information"
+      ],
+      "subintents": [
+        {
+          "subintent": "submit_travel_request",
+          "patterns": [
+            "submit travel request",
+            "add new trip",
+            "log business travel"
+          ],
+          "responses": [
+            "Please provide your travel purpose, destination, and advance amount to submit your travel request."
+          ]
+        },
+        {
+          "subintent": "view_travel_requests",
+          "patterns": [
+            "show my trips",
+            "my travel history",
+            "list travel claims"
+          ],
+          "responses": [
+            "Here are your travel requests with IDs, purpose, and advance details."
+          ]
+        },
+        {
+          "subintent": "travel_advance_status",
+          "patterns": [
+            "has my travel advance been approved?",
+            "advance for my trip",
+            "check travel advance status"
+          ],
+          "responses": [
+            "Your advance request for the trip has been saved. Please follow up with the approving authority."
+          ]
+        },
+        {
+          "subintent": "trip_status",
+          "patterns": [
+            "what's the status of my trip?",
+            "trip approval status",
+            "is my travel approved?"
+          ],
+          "responses": [
+            "Your trips are currently in 'Saved' status. You will be notified once they are approved."
+          ]
+        },
+        {
+          "subintent": "travel_purpose_check",
+          "patterns": [
+            "what is the purpose of my travel?",
+            "is this trip for business or private?",
+            "trip type details"
+          ],
+          "responses": [
+            "Most of your trips are listed as Business travel. For specific trip purposes, provide the Travel ID."
+          ]
+        }
+      ]
+    }
+  ]
 }
